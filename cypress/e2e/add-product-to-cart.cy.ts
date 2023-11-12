@@ -16,7 +16,9 @@ describe('add product to cart', () => {
   it('should not count duplicated products on cart', () => {
     cy.get('a[href^="/product"]').first().click()
     cy.url().should('include', '/product')
+
     cy.location('pathname').should('include', '/product')
+
     cy.contains('Adicionar ao carrinho').click()
     cy.contains('Adicionar ao carrinho').click()
 
@@ -24,7 +26,7 @@ describe('add product to cart', () => {
   })
 
   it('should be able to search for a product and add it to the cart', () => {
-    cy.get('input[name=q]').type('moletom').parent('form').submit()
+    cy.searchByQuery('moletom')
     cy.get('a[href^="/product"]').first().click()
     cy.location('pathname').should('include', '/product')
     cy.contains('Adicionar ao carrinho').click()
